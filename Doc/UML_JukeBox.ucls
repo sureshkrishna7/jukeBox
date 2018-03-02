@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="controller_view.JukeBox" project="Jukebox" 
+    file="/Jukebox/controller_view/JukeBox.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="124" x="255" y="108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="model.Player" project="Jukebox" file="/Jukebox/model/Player.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="137" width="171" x="419" y="108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="model.PlayerList" project="Jukebox" file="/Jukebox/model/PlayerList.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="83" width="97" x="630" y="108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="tests.SongTest" project="Jukebox" file="/Jukebox/tests/SongTest.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="101" width="119" x="767" y="108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="5" language="java" name="tests" project="Jukebox" file="/Jukebox/tests" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="52" width="114" x="1090" y="108"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="6" language="java" name="demoMediaPlayer.PlayAnMP3" project="Jukebox" 
+    file="/Jukebox/demoMediaPlayer/PlayAnMP3.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="137" width="124" x="926" y="108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="controller_view.JukeboxStartGUI" project="Jukebox" 
+    file="/Jukebox/controller_view/JukeboxStartGUI.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="138" x="1244" y="108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="model.Song" project="Jukebox" file="/Jukebox/model/Song.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="83" width="97" x="1422" y="108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="model.SongCollection" project="Jukebox" file="/Jukebox/model/SongCollection.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="83" width="127" x="1559" y="108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="model.Adjuster" project="Jukebox" file="/Jukebox/model/Adjuster.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="83" width="97" x="1726" y="108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="11" language="java" name="controller_view" project="Jukebox" file="/Jukebox/controller_view" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="52" width="127" x="1863" y="108"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="12" language="java" name="demoMediaPlayer" project="Jukebox" file="/Jukebox/demoMediaPlayer" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="52" width="144" x="2030" y="108"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="13" language="java" name="demoMediaPlayer.PlayAnMP3.EndOfSongHandler" project="Jukebox" 
+    file="/Jukebox/demoMediaPlayer/PlayAnMP3.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="101" width="154" x="926" y="285"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="14" language="java" name="model" project="Jukebox" file="/Jukebox/model" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="52" width="114" x="2214" y="108"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="15" language="java" name="songfiles" project="Jukebox" file="/Jukebox/songfiles" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="52" width="114" x="2368" y="108"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <nesting id="16">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="13"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
