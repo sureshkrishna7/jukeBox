@@ -6,6 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+
+/*
+ * The one that we are going to use in the project
+ */
 public class JukeBox extends Application{
 
   public static void main(String[] args) {
