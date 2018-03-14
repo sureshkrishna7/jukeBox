@@ -2,19 +2,17 @@ package model;
 
 import java.io.File;
 
-import model.SongCollection.timeObj;
-
 
 // Added to allow package model to exist on GitHub
 public class Song {
   
   private String title;
-  private timeObj songLength;
+  private TimeObj songLength;
   private String artist;
   private File songFile;
   
   //Constructor one with 4 parameters
-  public Song(String tit, timeObj len, String art, String file) {
+  public Song(String tit, TimeObj len, String art, String file) {
 	 this.title = tit;
 	 this.songLength = len;
 	 this.artist = art;

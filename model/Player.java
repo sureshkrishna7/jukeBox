@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Time;
 
 public class Player {
 
@@ -8,7 +7,7 @@ public class Player {
   private String password;
   //private int numberOfSongChoices;
   private boolean admin;
-  private Time remainingSongTime;
+  private TimeObj remainingSongTime; //1500 minutes of player song time
   private Adjuster numberOfSongChoices;
   
   public Player(String id, String password, boolean admin) {
@@ -16,6 +15,7 @@ public class Player {
 	 this.password = password;
 	 this.admin = admin;
 	 numberOfSongChoices = new Adjuster(3);
+	 remainingSongTime = new TimeObj(25, 0, 0);
   }
   
   public boolean useASong() {
