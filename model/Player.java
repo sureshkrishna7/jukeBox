@@ -35,4 +35,14 @@ public class Player {
 	  return this.ID;
   }
   
+  public boolean checkPassword(String name, String pass) {
+	
+	 if(name.equals(ID)) {
+		if(pass.equals(password)) {
+		  return true;
+		}
+	 }
+	 return false;
+  }
+  
 }// end Player
