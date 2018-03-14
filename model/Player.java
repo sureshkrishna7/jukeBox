@@ -1,11 +1,14 @@
 package model;
 
+import java.sql.Time;
+
 public class Player {
 
   private String ID;
   private String password;
   //private int numberOfSongChoices;
   private boolean admin;
+  private Time remainingSongTime;
   private Adjuster numberOfSongChoices;
   
   public Player(String id, String password, boolean admin) {
