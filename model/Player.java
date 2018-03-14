@@ -15,19 +15,19 @@ public class Player {
 	 numberOfSongChoices = new Adjuster(3);
   }
   
-  private boolean useASong() {
+  public boolean useASong() {
 	  return numberOfSongChoices.use();
   }
   
-  private int howManySongsLeft() {
+  public int howManySongsLeft() {
 	 return numberOfSongChoices.maxTimesForUse();
   }
   
-  private int howManySongsPlayed() {
+  public int howManySongsPlayed() {
 	 return numberOfSongChoices.timesUsed();
   }
   
-  private boolean canPlayASong() {
+  public boolean canPlayASong() {
 	 return numberOfSongChoices.canUse();
   }
   
