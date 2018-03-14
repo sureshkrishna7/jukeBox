@@ -12,4 +12,10 @@ public class Player {
 	 this.numberOfSongChoices = choices;
   }
   
+  private void decrementSongChoices() {
+	  numberOfSongChoices--;
+  }
+  
+  
+  
 }
