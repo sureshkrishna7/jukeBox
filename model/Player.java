@@ -4,20 +4,31 @@ public class Player {
 
   private String ID;
   private String password;
-  private int numberOfSongChoices;
+  //private int numberOfSongChoices;
   private boolean admin;
-  private Adjuster adjuster;
+  private Adjuster numberOfSongChoices;
   
   public Player(String id, String password, boolean admin) {
 	 this.ID = id;
 	 this.password = password;
-	 this.numberOfSongChoices = 3;
 	 this.admin = admin;
-	 adjuster = new Adjuster(3);
+	 numberOfSongChoices = new Adjuster(3);
   }
   
-  private void decrementSongChoices() {
-	  numberOfSongChoices--;
+  private boolean useASong() {
+	  return numberOfSongChoices.use();
+  }
+  
+  private int howManySongsLeft() {
+	 return numberOfSongChoices.maxTimesForUse();
+  }
+  
+  private int howManySongsPlayed() {
+	 return numberOfSongChoices.timesUsed();
+  }
+  
+  private boolean canPlayASong() {
+	 return numberOfSongChoices.canUse();
   }
   
   public String getName() {
