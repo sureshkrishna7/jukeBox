@@ -7,6 +7,7 @@ public class TimeObj {
   private int sec;
   private int timeInSeconds;
 
+  //constructor with hour min and sec parameters
   public TimeObj(int hour, int min, int sec) {
 	 /*
 	  * hour from 0 to 23 but no check on it except to see if it's non negative
@@ -18,6 +19,22 @@ public class TimeObj {
 		this.min = min;
 		this.sec = sec;
 		this.timeInSeconds = convertTimeToSeconds(hour, min, sec);
+	 }
+  }
+
+  //constructor with only seconds parameter
+  public TimeObj(int sec) {
+	 /*
+	  * hour from 0 to 23 but no check on it except to see if it's non negative
+	  * min from 0 to 59
+	  * sec from 0 to 60
+	  */
+	 if(sec >= 0) {
+		int time[] = convertSecondsToTime(sec);
+		this.hour = time[0];
+		this.min = time[1];
+		this.sec = time[2];
+		this.timeInSeconds = sec;
 	 }
   }
 
