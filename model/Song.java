@@ -24,7 +24,7 @@ public class Song {
   }
   
   public String getSongLength() {
-	 return songLength.getTimeString();
+	 return songLength.getTimeAsString();
   }
   
   public String getSongArtist() {
