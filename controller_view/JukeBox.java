@@ -115,7 +115,7 @@ public class JukeBox extends Application {
 				if(playerList.getIdList().contains(input1.getText())) {
 					Player p = playerList.getPlayer(input1.getText());
 					if(p.checkPassword(input1.getText(), input2.getText())) {
-						//loginText.setText(p.howManySongsLeft() + "selected. " + p.g);
+						loginText.setText(p.howManySongsLeft() + "selected. " + p.g);
 					}
 					
 				}
