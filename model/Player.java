@@ -34,6 +34,10 @@ public class Player {
 	 return numberOfSongChoices.canUse();
   }
   
+  public TimeObj getRemainingSongTime() {
+	 return remainingSongTime;
+  }
+  
   public String getName() {
 	  return this.ID;
   }
