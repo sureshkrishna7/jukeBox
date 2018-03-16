@@ -34,7 +34,7 @@ public class Player {
 	 return numberOfSongChoices.canUse();
   }
   
-  public TimeObj getRemainingSongTime() {
+  public TimeObj getRemainingSongObj() {
 	 return remainingSongTime;
   }
   
