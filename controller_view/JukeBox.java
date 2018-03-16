@@ -28,8 +28,9 @@ public class JukeBox extends Application {
 	private PlayerList playerList;
 	private Player current;
 	private TextField input1;
+	private TextField input2;
 	private Label loginText;
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -110,14 +111,20 @@ public class JukeBox extends Application {
 		public void handle(ActionEvent arg) {
 			Button buttonClicked = (Button) arg.getSource();
 			if(buttonClicked.getText().equals("Login")){
-				//need to verify that the name entered is part of list
-				if(!playerList.getIdList().contains(input1.getText())) {
+				//if the account name is valid, check if the password is right or wrong
+				if(playerList.getIdList().contains(input1.getText())) {
+					Player p = playerList.getPlayer(input1.getText());
+					if(p.checkPassword(input1.getText(), input2.getText())) {
+						//loginText.setText(p.howManySongsLeft() + "selected. " + p.g);
+					}
+					
+				}
+				//if no valid condition, then its "invalid credentials"
+				else {
 					loginText.setText("Invalid credentials");
 				}
 			}
-			
 		}
-		
 	}
 
 	// Note: This code snippet is a modified version of the Custom Login Dialog
