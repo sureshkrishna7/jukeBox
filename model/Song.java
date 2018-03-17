@@ -1,22 +1,19 @@
 package model;
 
-import java.io.File;
-
-
 // Added to allow package model to exist on GitHub
 public class Song {
   
   private String title;
   private TimeObj songLength;
   private String artist;
-  private File songFile;
+  private String songFile;
   
   //Constructor one with 4 parameters
   public Song(String tit, TimeObj len, String art, String file) {
 	 this.title = tit;
 	 this.songLength = len;
 	 this.artist = art;
-	 this.songFile = new File("./songfiles"+file);
+	 this.songFile = "songfiles/"+file;
   }
   
   public String getSongTitle() {
@@ -27,11 +24,15 @@ public class Song {
 	 return songLength.getTimeAsString();
   }
   
+  public int getSongLengthSec() {
+	 return songLength.entireTimeInSeconds();
+  }
+  
   public String getSongArtist() {
 	 return artist;
   }
   
-  public File getSongFile() {
+  public String getSongFile() {
 	 return songFile;
   }
  

@@ -1,3 +1,6 @@
 /JukeboxStartGUI.class
 /JukeBox.class
 /JukeBox$ButtonListener.class
+/JukeBox$EndOfSongHandler.class
+/JukeBox$ButtonListener$EndOfSongHandler.class
+/JukeBox$BeginingOfSongHandler.class

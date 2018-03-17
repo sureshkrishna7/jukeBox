@@ -1,13 +1,11 @@
 package model;
 
-
 public class Player {
 
   private String ID;
   private String password;
-  //private int numberOfSongChoices;
-  private boolean admin;
-  private TimeObj remainingSongTime; //1500 minutes of player song time
+  private boolean admin;					 // Merlin is the only admin
+  private TimeObj remainingSongTime; // 1500 minutes of player song time
   private Adjuster numberOfSongChoices;
   
   public Player(String id, String password) {
@@ -26,6 +24,10 @@ public class Player {
 	 remainingSongTime = new TimeObj(25, 0, 0);
   }
   
+  public boolean isAdmin() {
+	 return admin;
+  }
+  
   public boolean useSong() {
 	  return numberOfSongChoices.use();
   }
@@ -42,7 +44,7 @@ public class Player {
 	 return numberOfSongChoices.canUse();
   }
   
-  public TimeObj getTimeObj() {
+  public TimeObj time() {
 	 return remainingSongTime;
   }
   

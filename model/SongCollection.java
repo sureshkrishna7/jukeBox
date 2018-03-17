@@ -1,14 +1,13 @@
 package model;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
 
 public class SongCollection {
   
-  List<Song> songCollection;
+  HashMap<String, Song> songCollection;
   
   public SongCollection() {
-	 songCollection = new LinkedList<Song>();
+	 songCollection = new HashMap<>();
 	 dummySongs();
   }
   
@@ -23,18 +22,18 @@ public class SongCollection {
 	 Song h = new Song("Is it Love", new TimeObj(0, 0, 2), "3LAU", "IsItLove.mp3");
 	 Song i = new Song("Ice and Fire", new TimeObj(0, 0, 2), "Unknown", "IceFire.mp3");
 	 
-	 songCollection.add(a);
-	 songCollection.add(b);
-	 songCollection.add(c);
-	 songCollection.add(d);
-	 songCollection.add(e);
-	 songCollection.add(f);
-	 songCollection.add(g);
-	 songCollection.add(h);
-	 songCollection.add(i);
+	 songCollection.put("a", a);
+	 songCollection.put("b", b);
+	 songCollection.put("c", c);
+	 songCollection.put("d", d);
+	 songCollection.put("e", e);
+	 songCollection.put("f", f);
+	 songCollection.put("g", g);
+	 songCollection.put("h", h);
+	 songCollection.put("i", i);
   }
   
-  public List<Song> getSongCollection() {
+  public HashMap<String, Song> getSongCollection() {
 	 return this.songCollection;
   }
   

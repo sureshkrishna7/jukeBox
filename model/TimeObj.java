@@ -38,8 +38,9 @@ public class TimeObj {
 	 }
   }
 
+  // Determines if a user can play song with his remaining time
   public boolean canSubtractTimeBySeconds(int seconds) {
-	 if(timeInSeconds > seconds) {
+	 if(timeInSeconds >= seconds) {
 		return true;
 	 }
 	 return false;

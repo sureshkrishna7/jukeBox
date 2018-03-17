@@ -1,6 +1,9 @@
 package controller_view;
 
+import java.io.File;
+import java.net.URI;
 import java.util.Optional;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,10 +18,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import model.Player;
 import model.PlayerList;
+import model.Song;
+import model.SongCollection;
 
 /*
  * The one that we are going to use in the project
@@ -26,7 +33,8 @@ import model.PlayerList;
 public class JukeBox extends Application {
 
   private PlayerList playerList;
-  //private Player current;
+  private SongCollection songCollection;
+  private Player currentUser; // the one who uses the GUI
   private TextField input1;
   private PasswordField input2;
   private Label loginText;
@@ -53,6 +61,7 @@ public class JukeBox extends Application {
 
 	 // a PlayerList object is instantiated, default will have 5 hardcoded users
 	 playerList = new PlayerList();
+	 songCollection = new SongCollection();
 
 	 // Border pane is the entire scene
 	 BorderPane all = new BorderPane();
@@ -114,18 +123,30 @@ public class JukeBox extends Application {
 	 @Override
 	 public void handle(ActionEvent arg) {
 		Button buttonClicked = (Button) arg.getSource();
-		
+
 		if(buttonClicked.getText().equals("Login")){
 		  System.out.println("Login button clicked");
+		  
 		  String account = input1.getText().trim(); //removes trailing and leading white spaces
 		  String password = input2.getText();
 		  //if the account name is valid, check if the password is right or wrong
 		  if(playerList.getIdList().contains(account)) {
 			 System.out.println("User logged in:"+input1.getText()+","+ input2.getText());
-			 Player currentUser = playerList.getPlayer(account);
-			 // login the current user and enable the logout button
-			 if(currentUser.checkCredential(account, password)) {
-				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.getTimeObj().getTimeAsString());
+			 /*
+			  * 
+			  * 			***						  ***
+			  *  *** currentUser *** should ONLY be initialized after checking the credentials
+			  *  			***						  ***
+			  *  
+			  * OR else people with a correct username (but incorrect) password can play songs
+			  *  
+			  * login the current user and enable the logout button
+			  */
+			 if(playerList.getPlayer(account).checkCredential(account, password)) {
+				
+				// initialize currentUser inside this conditional
+				currentUser = playerList.getPlayer(account);
+				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
 				logout.setDisable(false);
 			 }
 			 else {
@@ -144,17 +165,65 @@ public class JukeBox extends Application {
 		}
 		if(buttonClicked.getText().equals("Logout")) {
 		  System.out.println("Logout button clicked");
+		  loginText.setText("Login first");
+		  currentUser = null;
 		}
 		if(buttonClicked.getText().equals("Select song 1")) {
 		  System.out.println("Song 1 button clicked");
-		  
-		  
+
+		  Song song1 = songCollection.getSongCollection().get("h");
+		  String path = song1.getSongFile();
+		  System.out.println("Song path = "+path);
+		  // Need a File and URI object so the path works on all OSs
+		  File file = new File(path);
+		  URI uri = file.toURI();
+		  // Play one mp3 and and have code run when the song ends
+		  Media media = new Media(uri.toString());
+		  MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+		  if(currentUser != null && currentUser.canPlaySong() && currentUser.time().canSubtractTimeBySeconds(song1.getSongLengthSec())) {
+			 currentUser.useSong();
+			 currentUser.time().subtractTimeBySeconds(song1.getSongLengthSec());
+			 mediaPlayer.setOnReady(new BeginingOfSongHandler());
+			 mediaPlayer.play();
+			 //System.out.println(mediaPlayer.getOnEndOfMedia());
+		  }
 		}
 		if(buttonClicked.getText().equals("Select song 2")) {
 		  System.out.println("Song 2 button clicked");
+
+		  Song song2 = songCollection.getSongCollection().get("d");
+		  String path2 = song2.getSongFile();
+		  System.out.println("Song path = "+path2);
+		  // Need a File and URI object so the path works on all OSs
+		  File file2 = new File(path2);
+		  URI uri2 = file2.toURI();
+		  // Play one mp3 and and have code run when the song ends
+		  Media media2 = new Media(uri2.toString());
+		  MediaPlayer mediaPlayer2 = new MediaPlayer(media2);
+
+		  if(currentUser != null && currentUser.canPlaySong() && currentUser.time().canSubtractTimeBySeconds(song2.getSongLengthSec())) {
+			 currentUser.useSong();
+			 currentUser.time().subtractTimeBySeconds(song2.getSongLengthSec());
+			 mediaPlayer2.setOnReady(new BeginingOfSongHandler());
+			 mediaPlayer2.play();
+			 //System.out.println(mediaPlayer2.getOnEndOfMedia());
+		  }
 		}
 	 }
   }
+
+  private class BeginingOfSongHandler implements Runnable {
+	 @Override
+	 public void run() {
+		// This Runnable apparently does not get called all the time.
+		// However, I have the same code in my Jukebox and it works.
+		// This question "setOnEndOfMedia does not work" is unanswered on the web.
+		loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
+		System.out.println("Song ended, played a song");
+	 }
+  }
+
 
   // Note: This code snippet is a modified version of the Custom Login Dialog
   // example found at: http://code.makery.ch/blog/javafx-dialogs-official/.
@@ -208,5 +277,5 @@ public class JukeBox extends Application {
 	 });
 
   }
-
 }
+
