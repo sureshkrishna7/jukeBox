@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -16,6 +17,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
@@ -40,6 +42,7 @@ public class JukeBox extends Application {
   private Label loginText;
   private Button logout;
   private Button login;
+  private TextField alertInput;
 
   public static void main(String[] args) {
 	 launch(args);
@@ -159,7 +162,7 @@ public class JukeBox extends Application {
 
 				// check for admin status
 				if(currentUser.isAdmin()) {
-				  addNewUser();
+				  alertBox();
 				}
 
 				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
@@ -187,7 +190,6 @@ public class JukeBox extends Application {
 		if(buttonClicked.getText().equals("Select song 1")) {
 		  System.out.println("Song 1 button clicked");
 
-
 		  Song song1 = songCollection.getSongCollection().get("h");
 		  String path = song1.getSongFile();
 		  System.out.println("Song path = "+path);
@@ -198,20 +200,41 @@ public class JukeBox extends Application {
 		  Media media = new Media(uri.toString());
 		  MediaPlayer mediaPlayer = new MediaPlayer(media);
 
-		  if(currentUser != null && currentUser.canPlaySong() && currentUser.time().canSubtractTimeBySeconds(song1.getSongLengthSec())) {
 
-			 currentUser.useSong();
-			 currentUser.time().subtractTimeBySeconds(song1.getSongLengthSec());
-			 loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
-			 mediaPlayer.setOnEndOfMedia(new BeginningOfSongHandler());
-			 mediaPlayer.play();
-			 //System.out.println(mediaPlayer.getOnEndOfMedia());
+		  if(currentUser != null) {
+
+			 /* 
+			  * 1) if we cannot use the song today
+			  * 2) the song has already been used 3 times */
+			 if(!song1.useSongToday()) {
+				songUsedThreeTimesAlert(song1);
+			 }
+
+			 else if(currentUser.canPlaySong() && currentUser.time().canSubtractTimeBySeconds(song1.getSongLengthSec())) {
+				currentUser.useSong();
+				currentUser.time().subtractTimeBySeconds(song1.getSongLengthSec());
+				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
+				mediaPlayer.setOnEndOfMedia(new BeginningOfSongHandler());
+				mediaPlayer.play();
+				//System.out.println(mediaPlayer.getOnEndOfMedia());
+			 }
+			 // when the player is out of 3 chances
+			 else if(!currentUser.canPlaySong()) {
+				outOfThreeChoiceAlert();
+			 }
+			 // when the player is out of 1500 minutes
+			 else if(!currentUser.time().canSubtractTimeBySeconds(song1.getSongLengthSec())){
+				outofTimeAlert();
+			 }
+			 //       *******
+			 // ****** CHECK if song has reached 3 number of play times per day *************
+			 //       *******
+			 //else if()
 		  }
-
 		}
+
 		if(buttonClicked.getText().equals("Select song 2")) {
 		  System.out.println("Song 2 button clicked");
-
 
 		  Song song2 = songCollection.getSongCollection().get("d");
 		  String path2 = song2.getSongFile();
@@ -223,17 +246,39 @@ public class JukeBox extends Application {
 		  Media media2 = new Media(uri2.toString());
 		  MediaPlayer mediaPlayer2 = new MediaPlayer(media2);
 
-		  if(currentUser != null && currentUser.canPlaySong() && currentUser.time().canSubtractTimeBySeconds(song2.getSongLengthSec())) {
 
-			 currentUser.useSong();
-			 currentUser.time().subtractTimeBySeconds(song2.getSongLengthSec());
-			 loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
-			 mediaPlayer2.setOnEndOfMedia(new BeginningOfSongHandler());
-			 mediaPlayer2.play();
-			 //System.out.println(mediaPlayer2.getOnEndOfMedia());
+		  if(currentUser != null) {
+
+			 /* 
+			  * 1) if we cannot use the song today
+			  * 2) the song has already been used 3 times */
+			 if(!song2.useSongToday()) {
+				songUsedThreeTimesAlert(song2);
+			 }
+
+			 else if(currentUser.canPlaySong() && currentUser.time().canSubtractTimeBySeconds(song2.getSongLengthSec())) {
+				currentUser.useSong();
+				currentUser.time().subtractTimeBySeconds(song2.getSongLengthSec());
+				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
+				mediaPlayer2.setOnEndOfMedia(new BeginningOfSongHandler());
+				mediaPlayer2.play();
+				//System.out.println(mediaPlayer2.getOnEndOfMedia());
+			 }
+			 // when the player is out of 3 chances
+			 else if(!currentUser.canPlaySong()) {
+				outOfThreeChoiceAlert();
+			 }
+			 // when the player is out of 1500 minutes
+			 else if(!currentUser.time().canSubtractTimeBySeconds(song2.getSongLengthSec())){
+				outofTimeAlert();
+			 }
+			 //       *******
+			 // ****** CHECK if song has reached 3 number of play times per day *************
+			 //       *******
+			 //else if()
 		  }
-
 		}
+
 	 }
   }
 
@@ -248,6 +293,83 @@ public class JukeBox extends Application {
 	 }
   }
 
+  private void outOfThreeChoiceAlert() {
+	 Alert alert = new Alert(AlertType.WARNING);
+	 alert.setHeaderText(currentUser.getName()+", You have selected the maximum songs today");
+	 alert.setContentText("Try again tomorrow . . . ");
+	 //Optional<ButtonType> result = alert.showAndWait();
+	 alert.showAndWait();
+	 
+	 // This is the only result possible in AlertType.WARNING
+	 // There are other AlertType modal dialogs that pauses the
+	 // application until the user clicks a button or enters something
+	 System.out.println("AlertType.Warning, Clicked OK");
+  }
+
+  public void songUsedThreeTimesAlert(Song song1) {
+	 Alert alert = new Alert(AlertType.WARNING);
+	 alert.setHeaderText(song1.getSongTitle()+": Song has already been used 3 times today");
+	 alert.setContentText("Select a different song!");
+	 //Optional<ButtonType> result = alert.showAndWait();
+	 alert.showAndWait();
+	 
+	 // This is the only result possible in AlertType.WARNING
+	 // There are other AlertType modal dialogs that pauses the
+	 // application until the user clicks a button or enters something
+	 System.out.println("AlertType.Warning, Clicked OK");
+  }
+
+  private void outofTimeAlert() {
+	 Alert alert = new Alert(AlertType.WARNING);
+	 alert.setHeaderText(currentUser.getName()+", You might be out of your time limit!");
+	 alert.setContentText("Your song is longer than your available time limit");
+	 //Optional<ButtonType> result = alert.showAndWait();
+	 alert.showAndWait();
+	 
+	 // This is the only result possible in AlertType.WARNING
+	 // There are other AlertType modal dialogs that pauses the
+	 // application until the user clicks a button or enters something
+	 System.out.println("AlertType.Warning, Clicked OK");
+  }
+
+  private void alertBox() {
+	 // A confirm Dialog
+	 Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+	 confirmAlert.setHeaderText("Add a new account?");
+	 confirmAlert.setContentText("Click cancel to select songs");
+	 Optional<ButtonType> confirmResult = confirmAlert.showAndWait();
+
+	 if (confirmResult.get() == ButtonType.OK) {
+		System.out.println("AlertType.CONFIRMATION, Clicked OK");
+		addNewUser();
+	 }
+
+	 if (confirmResult.get() == ButtonType.CANCEL) {
+		System.out.println("AlertType.CONFIRMATION, Clicked Cancel");
+	 }
+
+	 BorderPane pane = new BorderPane(); 
+	 alertInput = new TextField("Enter anything");
+	 pane.setCenter(alertInput);
+
+	 // Live Code Demo
+	 // Rick: DELETE THIS WEDNESDAY MORNING !!!!!!!!
+	 // You may use a lambda instead of writing entire classes
+	 alertInput.setOnAction(event -> {
+
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setHeaderText("You have selected the maximum songs today");
+		alert.setContentText("Try again tomorrow . . . ");
+		Optional<ButtonType> result = alert.showAndWait();
+
+		if (result.get() == ButtonType.OK) {
+		  // This is the only result possible in AlertType.WARNING
+		  // There are other AlertType modal dialogs that pauses the
+		  // application until the user clicks a button or enters something
+		  System.out.println("AlertType.Warning, Clicked OK");
+		}
+	 }); // end of lambda
+  }
 
   // Note: This code snippet is a modified version of the Custom Login Dialog
   // example found at: http://code.makery.ch/blog/javafx-dialogs-official/.
@@ -297,7 +419,7 @@ public class JukeBox extends Application {
 
 	 result.ifPresent(usernamePassword -> {
 		System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
-		playerList.getList().add(new Player(usernamePassword.getKey(), usernamePassword.getValue(), false));
+		playerList.addPlayer(new Player(usernamePassword.getKey(), usernamePassword.getValue(), false));
 	 });
 
   }

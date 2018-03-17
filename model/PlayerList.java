@@ -24,6 +24,11 @@ public class PlayerList {
 		}
 	}// end constructor
 	
+	public void addPlayer(Player p) {
+	  listOfPlayers.add(p);
+	  idList.add(p.getName());
+	}
+	
 	public Player getPlayer(String id) {
 		for(Player p: listOfPlayers) {
 			if(p.getName().equals(id)) {

@@ -7,6 +7,7 @@ public class Song {
   private TimeObj songLength;
   private String artist;
   private String songFile;
+  private Adjuster allowedPlays;
   
   //Constructor one with 4 parameters
   public Song(String tit, TimeObj len, String art, String file) {
@@ -14,6 +15,11 @@ public class Song {
 	 this.songLength = len;
 	 this.artist = art;
 	 this.songFile = "songfiles/"+file;
+	 this.allowedPlays = new Adjuster(3);
+  }
+  
+  public boolean useSongToday() {
+	 return allowedPlays.use();
   }
   
   public String getSongTitle() {
