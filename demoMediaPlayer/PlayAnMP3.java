@@ -22,7 +22,7 @@ public class PlayAnMP3 extends Application {
 
   @Override
   public void start(Stage stage) throws Exception {
-    String path = "songfiles/Capture.mp3";
+    String path = "songfiles/IsItLove.mp3";
 
     // Need a File and URI object so the path works on all OSs
     File file = new File(path);

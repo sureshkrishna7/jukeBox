@@ -20,6 +20,7 @@ public class SongCollection {
 	 Song e = new Song("Swing Cheese", new TimeObj(0, 0,15), "FreePlay Music", "SwingCheese.mp3");
 	 Song f = new Song("The Curtain Rises", new TimeObj(0, 0,28), "Kevin MacLeod", "TheCurtainRises.mp3");
 	 Song g = new Song("Untameable Fire", new TimeObj(0, 4, 42), "Pierre Langer", "UntameableFire.mp3");
+	 Song h = new Song("Is it Love", new TimeObj(0, 0, 2), "3LAU", "IsItLove.mp3");
 	 
 	 songCollection.add(a);
 	 songCollection.add(b);
@@ -28,6 +29,7 @@ public class SongCollection {
 	 songCollection.add(e);
 	 songCollection.add(f);
 	 songCollection.add(g);
+	 songCollection.add(h);
   }
   
   public List<Song> getSongCollection() {
