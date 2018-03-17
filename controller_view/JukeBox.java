@@ -113,9 +113,19 @@ public class JukeBox extends Application {
 	 midGrid.setVgap(10); // vertical gap in pixels
 
 	 // shows the entire stage
-	 Scene scene = new Scene(all, 300, 225);
-	 primaryStage.setScene(scene);
-	 primaryStage.show();
+
+	 System.out.println(System.getProperty("os.name"));
+
+	 if(System.getProperty("os.name").contains("Windows")) {
+		Scene scene = new Scene(all, 325, 250);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	 }
+	 else {
+		Scene scene = new Scene(all, 300, 225);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	 }
   }// end start
 
   private class ButtonListener implements EventHandler<ActionEvent>{
