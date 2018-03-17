@@ -190,7 +190,7 @@ public class JukeBox extends Application {
 				mediaStatus = true;
 				currentUser.useSong();
 				currentUser.time().subtractTimeBySeconds(song1.getSongLengthSec());
-				mediaPlayer.setOnEndOfMedia(new BeginingOfSongHandler());
+				mediaPlayer.setOnEndOfMedia(new BeginningOfSongHandler());
 				mediaPlayer.play();
 				//System.out.println(mediaPlayer.getOnEndOfMedia());
 			 }
@@ -214,7 +214,7 @@ public class JukeBox extends Application {
 				mediaStatus = true;
 				currentUser.useSong();
 				currentUser.time().subtractTimeBySeconds(song2.getSongLengthSec());
-				mediaPlayer2.setOnEndOfMedia(new BeginingOfSongHandler());
+				mediaPlayer2.setOnEndOfMedia(new BeginningOfSongHandler());
 				mediaPlayer2.play();
 				//System.out.println(mediaPlayer2.getOnEndOfMedia());
 			 }
@@ -223,7 +223,7 @@ public class JukeBox extends Application {
 	 }
   }
 
-  private class BeginingOfSongHandler implements Runnable {
+  private class BeginningOfSongHandler implements Runnable {
 	 @Override
 	 public void run() {
 		// This Runnable apparently does not get called all the time.
