@@ -13,7 +13,7 @@ public class SongCollection {
   }
   
   private void dummySongs() {
-	 Song a = new Song("Pokemon Capture", new TimeObj(0, 0, 5), "Pikachu", "Capture.mp3");
+	 Song a = new Song("Pokemon Capture", new TimeObj(0, 0, 1), "Pikachu", "Capture.mp3");
 	 Song b = new Song("Danse Macabre", new TimeObj(0, 0, 34), "Kevin MacLeod", "DanseMacabreViolinHook.mp3");
 	 Song c = new Song("Determined Tumbao", new TimeObj(0, 0,20), "FreePlay Music", "DeterminedTumbao.mp3");
 	 Song d = new Song("Loping Sting", new TimeObj(0, 0,5), "Kevin MacLeod", "LopingSting.mp3");
@@ -21,6 +21,7 @@ public class SongCollection {
 	 Song f = new Song("The Curtain Rises", new TimeObj(0, 0,28), "Kevin MacLeod", "TheCurtainRises.mp3");
 	 Song g = new Song("Untameable Fire", new TimeObj(0, 4, 42), "Pierre Langer", "UntameableFire.mp3");
 	 Song h = new Song("Is it Love", new TimeObj(0, 0, 2), "3LAU", "IsItLove.mp3");
+	 Song i = new Song("Ice and Fire", new TimeObj(0, 0, 2), "Unknown", "IceFire.mp3");
 	 
 	 songCollection.add(a);
 	 songCollection.add(b);
@@ -30,6 +31,7 @@ public class SongCollection {
 	 songCollection.add(f);
 	 songCollection.add(g);
 	 songCollection.add(h);
+	 songCollection.add(i);
   }
   
   public List<Song> getSongCollection() {
