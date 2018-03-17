@@ -22,6 +22,10 @@ public class Song {
 	 return allowedPlays.use();
   }
   
+  public boolean canUseSongToday() {
+	 return allowedPlays.canUse();
+  }
+  
   public String getSongTitle() {
 	 return title;
   }

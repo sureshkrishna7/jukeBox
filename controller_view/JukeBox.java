@@ -42,7 +42,6 @@ public class JukeBox extends Application {
   private Label loginText;
   private Button logout;
   private Button login;
-  private TextField alertInput;
 
   public static void main(String[] args) {
 	 launch(args);
@@ -137,6 +136,9 @@ public class JukeBox extends Application {
 	 public void handle(ActionEvent arg) {
 		Button buttonClicked = (Button) arg.getSource();
 
+		/*
+		 * The Login button clicked
+		 */
 		if(buttonClicked.getText().equals("Login")){
 		  System.out.println("Login button clicked");
 
@@ -182,11 +184,24 @@ public class JukeBox extends Application {
 			 loginText.setText("Invalid credentials");
 		  }
 		}
+
+
+
+		/*
+		 * If the Logout button is clicked	
+		 */
 		if(buttonClicked.getText().equals("Logout")) {
 		  System.out.println("Logout button clicked");
 		  loginText.setText("Login first");
 		  currentUser = null;
+		  logout.setDisable(true);
 		}
+
+
+
+		/*
+		 * If the song 1 button is clicked
+		 */
 		if(buttonClicked.getText().equals("Select song 1")) {
 		  System.out.println("Song 1 button clicked");
 
@@ -206,13 +221,14 @@ public class JukeBox extends Application {
 			 /* 
 			  * 1) if we cannot use the song today
 			  * 2) the song has already been used 3 times */
-			 if(!song1.useSongToday()) {
+			 if(!song1.canUseSongToday()) {
 				songUsedThreeTimesAlert(song1);
 			 }
 
 			 else if(currentUser.canPlaySong() && currentUser.time().canSubtractTimeBySeconds(song1.getSongLengthSec())) {
 				currentUser.useSong();
 				currentUser.time().subtractTimeBySeconds(song1.getSongLengthSec());
+				song1.useSongToday();
 				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
 				mediaPlayer.setOnEndOfMedia(new BeginningOfSongHandler());
 				mediaPlayer.play();
@@ -233,6 +249,11 @@ public class JukeBox extends Application {
 		  }
 		}
 
+
+
+		/*
+		 * If the song 2 button is clicked
+		 */
 		if(buttonClicked.getText().equals("Select song 2")) {
 		  System.out.println("Song 2 button clicked");
 
@@ -252,13 +273,14 @@ public class JukeBox extends Application {
 			 /* 
 			  * 1) if we cannot use the song today
 			  * 2) the song has already been used 3 times */
-			 if(!song2.useSongToday()) {
+			 if(!song2.canUseSongToday()) {
 				songUsedThreeTimesAlert(song2);
 			 }
 
 			 else if(currentUser.canPlaySong() && currentUser.time().canSubtractTimeBySeconds(song2.getSongLengthSec())) {
 				currentUser.useSong();
 				currentUser.time().subtractTimeBySeconds(song2.getSongLengthSec());
+				song2.useSongToday();
 				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
 				mediaPlayer2.setOnEndOfMedia(new BeginningOfSongHandler());
 				mediaPlayer2.play();
@@ -278,6 +300,8 @@ public class JukeBox extends Application {
 			 //else if()
 		  }
 		}
+
+
 
 	 }
   }
@@ -299,7 +323,7 @@ public class JukeBox extends Application {
 	 alert.setContentText("Try again tomorrow . . . ");
 	 //Optional<ButtonType> result = alert.showAndWait();
 	 alert.showAndWait();
-	 
+
 	 // This is the only result possible in AlertType.WARNING
 	 // There are other AlertType modal dialogs that pauses the
 	 // application until the user clicks a button or enters something
@@ -312,7 +336,7 @@ public class JukeBox extends Application {
 	 alert.setContentText("Select a different song!");
 	 //Optional<ButtonType> result = alert.showAndWait();
 	 alert.showAndWait();
-	 
+
 	 // This is the only result possible in AlertType.WARNING
 	 // There are other AlertType modal dialogs that pauses the
 	 // application until the user clicks a button or enters something
@@ -325,7 +349,7 @@ public class JukeBox extends Application {
 	 alert.setContentText("Your song is longer than your available time limit");
 	 //Optional<ButtonType> result = alert.showAndWait();
 	 alert.showAndWait();
-	 
+
 	 // This is the only result possible in AlertType.WARNING
 	 // There are other AlertType modal dialogs that pauses the
 	 // application until the user clicks a button or enters something
@@ -347,28 +371,6 @@ public class JukeBox extends Application {
 	 if (confirmResult.get() == ButtonType.CANCEL) {
 		System.out.println("AlertType.CONFIRMATION, Clicked Cancel");
 	 }
-
-	 BorderPane pane = new BorderPane(); 
-	 alertInput = new TextField("Enter anything");
-	 pane.setCenter(alertInput);
-
-	 // Live Code Demo
-	 // Rick: DELETE THIS WEDNESDAY MORNING !!!!!!!!
-	 // You may use a lambda instead of writing entire classes
-	 alertInput.setOnAction(event -> {
-
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setHeaderText("You have selected the maximum songs today");
-		alert.setContentText("Try again tomorrow . . . ");
-		Optional<ButtonType> result = alert.showAndWait();
-
-		if (result.get() == ButtonType.OK) {
-		  // This is the only result possible in AlertType.WARNING
-		  // There are other AlertType modal dialogs that pauses the
-		  // application until the user clicks a button or enters something
-		  System.out.println("AlertType.Warning, Clicked OK");
-		}
-	 }); // end of lambda
   }
 
   // Note: This code snippet is a modified version of the Custom Login Dialog
@@ -387,6 +389,13 @@ public class JukeBox extends Application {
 	 ButtonType loginButtonType = new ButtonType("Add new user", ButtonData.OK_DONE);
 	 dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
 
+	 /*final Button loginButtonType = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+	 loginButtonType.addEventFilter(ActionEvent.ACTION, event -> {
+	     if (!validateAndStore()) {
+	         event.consume();
+	     }
+	 });
+	  */
 	 // Create the Account Name and password labels and fields
 	 GridPane grid = new GridPane();
 	 grid.setHgap(10);
@@ -419,7 +428,12 @@ public class JukeBox extends Application {
 
 	 result.ifPresent(usernamePassword -> {
 		System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
-		playerList.addPlayer(new Player(usernamePassword.getKey(), usernamePassword.getValue(), false));
+
+		if(usernamePassword.getKey().trim().equals("")) {
+		}
+		else {
+		  playerList.addPlayer(new Player(usernamePassword.getKey(), usernamePassword.getValue(), false));
+		}
 	 });
 
   }
