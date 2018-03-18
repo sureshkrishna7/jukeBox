@@ -205,7 +205,7 @@ public class JukeBox extends Application {
 		if(buttonClicked.getText().equals("Select song 1")) {
 		  System.out.println("Song 1 button clicked");
 
-		  Song song1 = songCollection.getSongCollection().get("h");
+		  Song song1 = songCollection.getSongCollection().get("a");
 		  String path = song1.getSongFile();
 		  System.out.println("Song path = "+path);
 		  // Need a File and URI object so the path works on all OSs
@@ -214,7 +214,7 @@ public class JukeBox extends Application {
 		  // Play one mp3 and and have code run when the song ends
 		  Media media = new Media(uri.toString());
 		  MediaPlayer mediaPlayer = new MediaPlayer(media);
-
+		  
 
 		  if(currentUser != null) {
 
@@ -427,11 +427,10 @@ public class JukeBox extends Application {
 	 Optional<Pair<String, String>> result = dialog.showAndWait();
 
 	 result.ifPresent(usernamePassword -> {
-		System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
-
 		if(usernamePassword.getKey().trim().equals("")) {
 		}
 		else {
+		  System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
 		  playerList.addPlayer(new Player(usernamePassword.getKey(), usernamePassword.getValue(), false));
 		}
 	 });

@@ -82,7 +82,7 @@ public class Adjuster {
   public void pretendItIsTomorrow() {
 	 // TODO: Complete this method
 	 timesToUse = originalTimesToUse;
-	 //today = LocalDate.now();
+	 today = LocalDate.now();
 	 countUsed = 0;
   }
 }
