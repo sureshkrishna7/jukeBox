@@ -26,7 +26,11 @@ import model.Song;
 import model.SongCollection;
 
 /*
- * The one that we are going to use in the project
+ * Class: JukeBox
+ * Authors: Suresh Krishna and Andrew Lane
+ * Purpose: The GUI for a Jukebox, the controller. Sets the stage for the jukebox, instantiates necessary class variables,
+ * many of which are of classes in the model. Includes handlers for when the buttons are pressed. Includes methods for various
+ * possibilities of the restrictions of using the jukebox for each user.
  */
 public class JukeBox extends Application {
 
@@ -43,6 +47,9 @@ public class JukeBox extends Application {
 	 launch(args);
   }
 
+  /*
+   * start -- inherited from Application, starts the GUI, utilizes BorderPane and GridPane for display.
+   */
   @Override
   public void start(Stage primaryStage) throws Exception {
 	 /*
@@ -112,8 +119,6 @@ public class JukeBox extends Application {
 
 	 // shows the entire stage
 
-	 System.out.println(System.getProperty("os.name"));
-
 	 if(System.getProperty("os.name").contains("Windows")) {
 		Scene scene = new Scene(all, 325, 250);
 		primaryStage.setScene(scene);
@@ -126,6 +131,9 @@ public class JukeBox extends Application {
 	 }
   }// end start
 
+  /*
+   * ButtonListener -- handler for buttons pressed in the GUI. Has all necessary actions for possible events and situations.
+   */
   private class ButtonListener implements EventHandler<ActionEvent>{
 
 	 @Override
@@ -216,7 +224,6 @@ public class JukeBox extends Application {
 				currentUser.time().subtractTimeBySeconds(song1.getSongLengthSec());
 				song1.useSongToday();
 				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
-
 				songCollection.addSongtoQueue(song1);
 			 }
 			 // when the player is out of 3 chances
@@ -233,8 +240,6 @@ public class JukeBox extends Application {
 			 //else if()
 		  }
 		}
-
-
 
 		/*
 		 * If the song 2 button is clicked
@@ -274,11 +279,12 @@ public class JukeBox extends Application {
 			 //else if()
 		  }
 		}
-
-
 	 }
   }
 
+  /*
+   * outOfThreeChoiceAlert() -- method called when a user has maxed out their number of songs to play.
+   */
   private void outOfThreeChoiceAlert() {
 	 Alert alert = new Alert(AlertType.WARNING);
 	 alert.setHeaderText(currentUser.getName()+", You have selected the maximum songs today");
@@ -292,6 +298,9 @@ public class JukeBox extends Application {
 	 System.out.println("AlertType.Warning, Clicked OK");
   }
 
+  /*
+   * songUsedThreeTimesAlert(Song) -- method called when a particular song has been played its maximum alloted times.
+   */
   public void songUsedThreeTimesAlert(Song song1) {
 	 Alert alert = new Alert(AlertType.WARNING);
 	 alert.setHeaderText(song1.getSongTitle()+": Song has already been used 3 times today");
@@ -305,6 +314,9 @@ public class JukeBox extends Application {
 	 System.out.println("AlertType.Warning, Clicked OK");
   }
 
+  /*
+   * outofTimeAlert() -- method called when the user has used all alloted time for one day.
+   */
   private void outofTimeAlert() {
 	 Alert alert = new Alert(AlertType.WARNING);
 	 alert.setHeaderText(currentUser.getName()+", You might be out of your time limit!");
@@ -318,6 +330,9 @@ public class JukeBox extends Application {
 	 System.out.println("AlertType.Warning, Clicked OK");
   }
 
+  /*
+   * alertBox() -- called when the admin logs in, prompts to see if the admin wants to add a new account or just play songs.
+   */
   private void alertBox() {
 	 // A confirm Dialog
 	 Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
@@ -335,12 +350,9 @@ public class JukeBox extends Application {
 	 }
   }
 
-  // Note: This code snippet is a modified version of the Custom Login Dialog
-  // example found at: http://code.makery.ch/blog/javafx-dialogs-official/.
-  // Modifications by Rick Mercer.
-  //
-  // Rick is providing this to use "as is" for your Jukebox project
-  // and long as you in the above attribution.
+  /*
+   * addNewUser() -- called in alertBox() when the admin confirms that they want to add a new user
+   */
   private void addNewUser() {
 	 // Create a custom dialog with two input fields
 	 Dialog<Pair<String, String>> dialog = new Dialog<>();
