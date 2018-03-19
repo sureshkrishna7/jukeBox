@@ -55,8 +55,14 @@ public class Adjuster {
    *         the current date. Return false if the max usages has been reached
    */
   public boolean use() {
-	 // TODO: Complete this method
-	 // 
+	 
+	 // if today is not equal to localDate.now then reset the counter 
+	 if(!today.isEqual(LocalDate.now())) {
+		timesToUse = originalTimesToUse;
+		countUsed = 0;
+		today = LocalDate.now();
+	 }
+	 
 	 if(((timesToUse - 1) >= 0) && today.isEqual(LocalDate.now())) {
 		timesToUse = timesToUse - 1;
 		countUsed = countUsed + 1;
@@ -82,7 +88,7 @@ public class Adjuster {
   public void pretendItIsTomorrow() {
 	 // TODO: Complete this method
 	 timesToUse = originalTimesToUse;
-	 today = LocalDate.now();
+	 //today = LocalDate.now();
 	 countUsed = 0;
   }
 }

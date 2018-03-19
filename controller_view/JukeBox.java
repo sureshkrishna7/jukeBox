@@ -1,7 +1,5 @@
 package controller_view;
 
-import java.io.File;
-import java.net.URI;
 import java.util.Optional;
 
 import javafx.application.Application;
@@ -20,8 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import model.Player;
@@ -206,21 +202,11 @@ public class JukeBox extends Application {
 		  System.out.println("Song 1 button clicked");
 
 		  Song song1 = songCollection.getSongCollection().get("a");
-		  String path = song1.getSongFile();
-		  System.out.println("Song path = "+path);
-		  // Need a File and URI object so the path works on all OSs
-		  File file = new File(path);
-		  URI uri = file.toURI();
-		  // Play one mp3 and and have code run when the song ends
-		  Media media = new Media(uri.toString());
-		  MediaPlayer mediaPlayer = new MediaPlayer(media);
 		  
-
 		  if(currentUser != null) {
 
-			 /* 
-			  * 1) if we cannot use the song today
-			  * 2) the song has already been used 3 times */
+			  // 1) if we cannot use the song today
+			  // 2) the song has already been used 3 times
 			 if(!song1.canUseSongToday()) {
 				songUsedThreeTimesAlert(song1);
 			 }
@@ -230,9 +216,8 @@ public class JukeBox extends Application {
 				currentUser.time().subtractTimeBySeconds(song1.getSongLengthSec());
 				song1.useSongToday();
 				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
-				mediaPlayer.setOnEndOfMedia(new BeginningOfSongHandler());
-				mediaPlayer.play();
-				//System.out.println(mediaPlayer.getOnEndOfMedia());
+
+				songCollection.addSongtoQueue(song1);
 			 }
 			 // when the player is out of 3 chances
 			 else if(!currentUser.canPlaySong()) {
@@ -258,21 +243,11 @@ public class JukeBox extends Application {
 		  System.out.println("Song 2 button clicked");
 
 		  Song song2 = songCollection.getSongCollection().get("d");
-		  String path2 = song2.getSongFile();
-		  System.out.println("Song path = "+path2);
-		  // Need a File and URI object so the path works on all OSs
-		  File file2 = new File(path2);
-		  URI uri2 = file2.toURI();
-		  // Play one mp3 and and have code run when the song ends
-		  Media media2 = new Media(uri2.toString());
-		  MediaPlayer mediaPlayer2 = new MediaPlayer(media2);
-
 
 		  if(currentUser != null) {
 
-			 /* 
-			  * 1) if we cannot use the song today
-			  * 2) the song has already been used 3 times */
+			  // 1) if we cannot use the song today
+			  // 2) the song has already been used 3 times 
 			 if(!song2.canUseSongToday()) {
 				songUsedThreeTimesAlert(song2);
 			 }
@@ -282,9 +257,8 @@ public class JukeBox extends Application {
 				currentUser.time().subtractTimeBySeconds(song2.getSongLengthSec());
 				song2.useSongToday();
 				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
-				mediaPlayer2.setOnEndOfMedia(new BeginningOfSongHandler());
-				mediaPlayer2.play();
-				//System.out.println(mediaPlayer2.getOnEndOfMedia());
+				
+				songCollection.addSongtoQueue(song2);
 			 }
 			 // when the player is out of 3 chances
 			 else if(!currentUser.canPlaySong()) {
@@ -302,18 +276,6 @@ public class JukeBox extends Application {
 		}
 
 
-
-	 }
-  }
-
-  private class BeginningOfSongHandler implements Runnable {
-	 @Override
-	 public void run() {
-		// This Runnable apparently does not get called all the time.
-		// However, I have the same code in my Jukebox and it works.
-		// This question "setOnEndOfMedia does not work" is unanswered on the web.
-		//loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
-		System.out.println("Song ended, played a song");
 	 }
   }
 
