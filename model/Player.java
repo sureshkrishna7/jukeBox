@@ -1,5 +1,10 @@
 package model;
 
+/*
+ * Class: Player
+ * Authors: Suresh Krishna and Andrew Lane
+ * Purpose: 
+ */
 public class Player {
 
   private String ID;
@@ -53,13 +58,16 @@ public class Player {
   }
   
   public boolean checkCredential(String name, String pass) {
-	
 	 if(name.equals(ID)) {
 		if(pass.equals(password)) {
 		  return true;
 		}
 	 }
 	 return false;
+  }
+  
+  public Adjuster getAdjuster() {
+	  return this.numberOfSongChoices;
   }
   
 }// end Player

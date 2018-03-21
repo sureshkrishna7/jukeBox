@@ -1,94 +1,80 @@
 package model;
 
 import java.time.LocalDate;
-
+/*
+ * Class: Adjuster
+ * Authors: Suresh Krishna and Andrew Lane
+ * Purpose: The class is a that will keep track of song choices, an instance of it will be present in the Player class.
+ */
 public class Adjuster {
 
-  //TODO: Add any needed instance variables
-
-  private int timesToUse;
+  private int maxUses;
   private int countUsed;
   private LocalDate today;
-
-
-  private int originalTimesToUse;
-
-  /**
-   * How often this object will allow its use.
-   * 
-   * @return The maximum number of usages (how often use can b called
+  
+  /*
+   * Adjuster(int) -- constructor. Sets int param to maxUses. Sets countUsed to zero and sets the
+   * date to today, the day of construction.
    */
-  public Adjuster(int timesToUse1) {
-	 // TODO: Complete this method
-	 timesToUse = timesToUse1;
-	 originalTimesToUse = timesToUse1;
-	 countUsed = 0;
+  public Adjuster(int timesToUse) {
+	 this.maxUses = timesToUse;
+	 //originalTimesToUse = timesToUse1;
+	 this.countUsed = 0;
 
 	 //Current Date
 	 today = LocalDate.now();
-	 //System.out.println("Current Date="+today);
   }
 
-  /**
-   * Getter to let users now how often use() can be called today.
-   * @return The number of times use() can be called in a a calendar date
+  /*
+   * maxTimesForUse() -- getter for maxUses
    */
   public int maxTimesForUse() {
-	 // TODO: Complete this method
-	 return timesToUse;
+	 return maxUses;
+  }
+  
+  public LocalDate getInitDate() {
+	  return today;
   }
 
-  /**
-   * Use this to know if the max usage times has been reached
-   * 
-   * @return True if use can be called again
+  /*
+   * canUse() -- returns boolean false if maxUses has been reached, true otherwise
    */
   public boolean canUse() {
-	 // TODO: Complete this method
-	 return (timesToUse > 0); 
+	 if(countUsed == maxUses) return false;
+	 return true;
   }
 
-  /**
-   * Use this object once if possible.
-   * 
-   * @return true if the max usage has not been reached and record a usage on
-   *         the current date. Return false if the max usages has been reached
+  /*
+   * use() -- checks the date, if it's a day or more past construction, then countUsed is set to 1
+   * and the new date object is set to the current date. Checks if canUse, increments countUsed if true
+   * and returns true, if not, it returns false.
    */
   public boolean use() {
 	 
-	 // if today is not equal to localDate.now then reset the counter 
-	 if(!today.isEqual(LocalDate.now())) {
-		timesToUse = originalTimesToUse;
-		countUsed = 0;
-		today = LocalDate.now();
-	 }
-	 
-	 if(((timesToUse - 1) >= 0) && today.isEqual(LocalDate.now())) {
-		timesToUse = timesToUse - 1;
-		countUsed = countUsed + 1;
-		return true;
-	 }
-	 return false; 
+	  if(!today.isEqual(LocalDate.now())) {
+		  countUsed = 0;
+		  today = LocalDate.now();
+	  }
+	  if(canUse()) {
+		  countUsed++;
+		  return true;
+	  }
+	  return false;
   }
 
-  /**
-   * Check to see How often has use() been called successfully
-   * 
-   * @return How often use() has been called.
+  /*
+   * timesUsed() -- getter for countUsed variable
    */
   public int timesUsed() {
-	 // TODO: Complete this method
 	 return countUsed;
   }
 
-  /**
-   *  Add this method for easy testing, or wait until midnight.
-   *  Do NOT change your system clock!
+  /*
+   * pretendItIsTomorrow() -- this method sets the date to one day in the future and resets the number
+   * of uses, used for testing purposes.
    */
   public void pretendItIsTomorrow() {
-	 // TODO: Complete this method
-	 timesToUse = originalTimesToUse;
-	 //today = LocalDate.now();
+	 today = today.plusDays(1);
 	 countUsed = 0;
   }
 }
