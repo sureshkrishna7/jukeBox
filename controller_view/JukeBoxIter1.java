@@ -24,11 +24,12 @@ import model.Player;
 import model.PlayerList;
 import model.Song;
 import model.SongCollection;
+import model.SongViewer;
 
 /*
  * The one that we are going to use in the project
  */
-public class JukeBox extends Application {
+public class JukeBoxIter1 extends Application {
 
   private PlayerList playerList;
   private SongCollection songCollection;
@@ -38,7 +39,7 @@ public class JukeBox extends Application {
   private Label loginText;
   private Button logout;
   private Button login;
-
+  
   public static void main(String[] args) {
 	 launch(args);
   }
@@ -60,7 +61,6 @@ public class JukeBox extends Application {
 	 // a PlayerList object is instantiated, default will have 5 hardcoded users
 	 playerList = new PlayerList();
 	 songCollection = new SongCollection();
-
 	 // Border pane is the entire scene
 	 BorderPane all = new BorderPane();
 

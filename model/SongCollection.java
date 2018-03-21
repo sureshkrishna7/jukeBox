@@ -2,8 +2,10 @@ package model;
 
 import java.io.File;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import javafx.scene.media.Media;
@@ -35,7 +37,7 @@ public class SongCollection {
 	 Song g = new Song("Untameable Fire", new TimeObj(0, 4, 42), "Pierre Langer", "UntameableFire.mp3");
 	 Song h = new Song("Is it Love", new TimeObj(0, 0, 2), "3LAU", "IsItLove.mp3");
 	 Song i = new Song("Ice and Fire", new TimeObj(0, 0, 2), "Unknown", "IceFire.mp3");
-
+	 	 
 	 songCollection.put("a", a);
 	 songCollection.put("b", b);
 	 songCollection.put("c", c);
