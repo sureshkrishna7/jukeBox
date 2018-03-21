@@ -42,7 +42,7 @@ public class Player {
   }
   
   public int songsPlayed() {
-	 return numberOfSongChoices.timesUsed();
+	 return numberOfSongChoices.getCountUsed();
   }
   
   public boolean canPlaySong() {

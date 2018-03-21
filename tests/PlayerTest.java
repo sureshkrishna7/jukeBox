@@ -2,13 +2,8 @@ package tests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.time.LocalDate;
-
 import org.junit.Test;
-
-import model.Adjuster;
 import model.Player;
 
 public class PlayerTest {
@@ -17,7 +12,7 @@ public class PlayerTest {
 	public void testAdjusterGetters() {
 		Player p = new Player("abc", "123");
 		assertTrue(p.getAdjuster().maxTimesForUse() == 3);
-		assertTrue(p.getAdjuster().timesUsed() == 0);
+		assertTrue(p.getAdjuster().getCountUsed() == 0);
 	}
 
 	@Test
@@ -34,7 +29,7 @@ public class PlayerTest {
 		Player p = new Player("abc", "123");
 		p.useSong();
 		p.getAdjuster().pretendItIsTomorrow();
-		assertTrue(p.getAdjuster().timesUsed() == 0);
+		assertTrue(p.getAdjuster().getCountUsed() == 0);
 	}
 
 	@Test

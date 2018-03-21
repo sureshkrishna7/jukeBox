@@ -16,18 +16,18 @@ public class SongViewer extends TableView<Song> {
 		TableColumn<Song, String> artistCol = new TableColumn<>("Artist");
 		TableColumn<Song, String> timeCol = new TableColumn<>("Time");
 		
-		playCountCol.setCellValueFactory(new PropertyValueFactory<Song, String>("allowedPlays"));
+		playCountCol.setCellValueFactory(new PropertyValueFactory<Song, String>("playCount"));
 		titleCol.setCellValueFactory(new PropertyValueFactory<Song, String>("title"));
 		artistCol.setCellValueFactory(new PropertyValueFactory<Song, String>("artist"));
 		timeCol.setCellValueFactory(new PropertyValueFactory<Song, String>("songLength"));
 		
 		this.getColumns().addAll(playCountCol, titleCol, artistCol, timeCol);
 	    
-	    playCountCol.setPrefWidth(100);
-	    titleCol.setPrefWidth(60);
-	    artistCol.setPrefWidth(100);
+	    playCountCol.setPrefWidth(50);
+	    titleCol.setPrefWidth(200);
+	    artistCol.setPrefWidth(150);
 	    timeCol.setPrefWidth(100);
-	    this.setMaxWidth(263);
+	    this.setMaxWidth(520);
 
 	    setObserverList();
 	}

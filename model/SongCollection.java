@@ -2,12 +2,9 @@ package model;
 
 import java.io.File;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 

@@ -63,9 +63,9 @@ public class Adjuster {
   }
 
   /*
-   * timesUsed() -- getter for countUsed variable
+   * getCountUsed() -- getter for countUsed variable
    */
-  public int timesUsed() {
+  public int getCountUsed() {
 	 return countUsed;
   }
 

@@ -77,8 +77,7 @@ public class JukeBoxIter2 extends Application {
 	 Label songListHeader = new Label("Song List");
 	 topGrid.add(songListHeader, 0, 0);
 	 
-	 // can't figure out why only song length is showing up in songViewer
-	 
+	 // adding songViewer TableView
 	 topGrid.add(songViewer, 0, 1);
 	 
 	 // the buttons are set top of the border pane
@@ -115,8 +114,8 @@ public class JukeBoxIter2 extends Application {
 
 	 BorderPane.setMargin(midGrid, new Insets(5, 10, 10, 10));
 	 midGrid.setHgap(10); // horizontal gap in pixels => that's what makes it clean
-	 midGrid.setVgap(10); // vertical gap in pixels
 
+	 midGrid.setVgap(10); // vertical gap in pixels
 	 // shows the entire stage
 
 	 if(System.getProperty("os.name").contains("Windows")) {
@@ -302,7 +301,7 @@ public class JukeBoxIter2 extends Application {
 
   public void songUsedThreeTimesAlert(Song song1) {
 	 Alert alert = new Alert(AlertType.WARNING);
-	 alert.setHeaderText(song1.getSongTitle()+": Song has already been used 3 times today");
+	 alert.setHeaderText(song1.getTitle()+": Song has already been used 3 times today");
 	 alert.setContentText("Select a different song!");
 	 //Optional<ButtonType> result = alert.showAndWait();
 	 alert.showAndWait();

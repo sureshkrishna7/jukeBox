@@ -1,13 +1,17 @@
 package model;
 
+import java.io.Serializable;
+
 // Added to allow package model to exist on GitHub
-public class Song {
+@SuppressWarnings("serial")
+public class Song implements Serializable {
   
   private String title;
   private TimeObj songLength;
+  private int playCount;
   private String artist;
   private String songFile;
-  private Adjuster allowedPlays;
+  private Adjuster adjuster;
   
   //Constructor one with 4 parameters
   public Song(String tit, TimeObj len, String art, String file) {
@@ -15,18 +19,23 @@ public class Song {
 	 this.songLength = len;
 	 this.artist = art;
 	 this.songFile = "songfiles/"+file;
-	 this.allowedPlays = new Adjuster(3);
+	 this.adjuster = new Adjuster(3);
+	 this.playCount = 0;
   }
   
   public boolean useSongToday() {
-	 return allowedPlays.use();
+	 return adjuster.use();
   }
   
   public boolean canUseSongToday() {
-	 return allowedPlays.canUse();
+	 return adjuster.canUse();
   }
   
-  public String getSongTitle() {
+  public int getPlayCount() {
+	  playCount = adjuster.getCountUsed();
+	  return playCount;
+  }
+  public String getTitle() {
 	 return title;
   }
   
@@ -38,7 +47,7 @@ public class Song {
 	 return songLength.entireTimeInSeconds();
   }
   
-  public String getSongArtist() {
+  public String getArtist() {
 	 return artist;
   }
   

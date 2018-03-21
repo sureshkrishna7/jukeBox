@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -15,7 +16,6 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -24,7 +24,6 @@ import model.Player;
 import model.PlayerList;
 import model.Song;
 import model.SongCollection;
-import model.SongViewer;
 
 /*
  * Class: JukeBox
@@ -303,7 +302,7 @@ public class JukeBoxIter1 extends Application {
    */
   public void songUsedThreeTimesAlert(Song song1) {
 	 Alert alert = new Alert(AlertType.WARNING);
-	 alert.setHeaderText(song1.getSongTitle()+": Song has already been used 3 times today");
+	 alert.setHeaderText(song1.getTitle()+": Song has already been used 3 times today");
 	 alert.setContentText("Select a different song!");
 	 //Optional<ButtonType> result = alert.showAndWait();
 	 alert.showAndWait();
