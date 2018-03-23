@@ -8,7 +8,6 @@ public class Song implements Serializable {
   
   private String title;
   private TimeObj songLength;
-  private int playCount;
   private String artist;
   private String songFile;
   private Adjuster adjuster;
@@ -20,7 +19,6 @@ public class Song implements Serializable {
 	 this.artist = art;
 	 this.songFile = "songfiles/"+file;
 	 this.adjuster = new Adjuster(3);
-	 this.playCount = 0;
   }
   
   public boolean useSongToday() {
@@ -32,8 +30,7 @@ public class Song implements Serializable {
   }
   
   public int getPlayCount() {
-	  playCount = adjuster.getCountUsed();
-	  return playCount;
+	  return adjuster.getCountUsed();
   }
   public String getTitle() {
 	 return title;

@@ -9,12 +9,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class SongViewer extends TableView<Song> {
 
+	TableColumn<Song, String> playCountCol;
+	TableColumn<Song, String> titleCol;
+	TableColumn<Song, String> artistCol;
+	TableColumn<Song, String> timeCol;
+	
 	@SuppressWarnings("unchecked")
 	public SongViewer() {
-		TableColumn<Song, String> playCountCol = new TableColumn<>("Plays");
-		TableColumn<Song, String> titleCol = new TableColumn<>("Title");
-		TableColumn<Song, String> artistCol = new TableColumn<>("Artist");
-		TableColumn<Song, String> timeCol = new TableColumn<>("Time");
+		playCountCol = new TableColumn<>("Plays");
+		titleCol = new TableColumn<>("Title");
+		artistCol = new TableColumn<>("Artist");
+		timeCol = new TableColumn<>("Time");
 		
 		playCountCol.setCellValueFactory(new PropertyValueFactory<Song, String>("playCount"));
 		titleCol.setCellValueFactory(new PropertyValueFactory<Song, String>("title"));
@@ -41,4 +46,9 @@ public class SongViewer extends TableView<Song> {
 		this.setItems(songs);
 		this.getSelectionModel().select(0);
 	}
+	
+	/*public void updatePlayCount() {
+		playCountCol.setCellValueFactory(new PropertyValueFactory<Song, String>("playCount"));
+		this.getColumns().addAll(playCountCol, titleCol, artistCol, timeCol);
+	}*/
 }
