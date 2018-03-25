@@ -104,7 +104,9 @@ public class JukeBoxIter2 extends Application {
 
 	 // the top grid pane that contains the SongViewer object
 	 GridPane topGrid = new GridPane();
-	 ButtonListener handler = new ButtonListener();
+	 ButtonListener loginHandler = new ButtonListener();
+
+	 ButtonListener playHandler = new ButtonListener();
 	 // song1.setOnAction(handler);
 	 // song2.setOnAction(handler);
 	 // topGrid.add(song1, 0, 0);
@@ -141,13 +143,13 @@ public class JukeBoxIter2 extends Application {
 	 midGrid.add(input2, 1, 2);
 
 	 login = new Button("Login");
-	 login.setOnAction(handler);
+	 login.setOnAction(loginHandler);
 	 loginText = new Label("Login first");
 	 logout = new Button("Logout");
 	 logout.setDisable(true);
-	 logout.setOnAction(handler);
+	 logout.setOnAction(loginHandler);
 
-	 play.setOnAction(handler);
+	 play.setOnAction(playHandler);
 
 	 midGrid.add(login, 2, 1);
 	 midGrid.add(loginText, 1, 0);
@@ -199,16 +201,9 @@ public class JukeBoxIter2 extends Application {
   }
 
   private void defaultList() {
-	 //persistList.add(listView);
-	 //persistList.add(playerList);
-	 //songCollection.defaultSongCollection();
 	 playerList.setUpDefault();
 	 songCollection.defaultSongCollection();
 	 songViewer = new SongViewer(songCollection);
-	 //songViewer.setDefaultObserverList();
-	 //songViewer = new SongViewer();
-	 //persistList.add(songViewer);
-	 //persistList.add(songCollection);
   }
 
   private void readPersistList() {
@@ -220,15 +215,16 @@ public class JukeBoxIter2 extends Application {
 		ArrayList<Serializable> list3 = (ArrayList<Serializable>) in.readObject();
 		for (Serializable song : list3) {
 		  songCollection.addSong((Song) song);
-		  //songCollection.addSong((Song) song);
+		  
 		}
+		
 		songViewer = new SongViewer(songCollection);
-		//songCollection.addSongsToCollection(songsToAppear);
-		//songViewer.setReadObserverList(songsToAppear);
-		//songViewer.setDefaultObserverList();
+		
 		in.close();
 	 } catch (FileNotFoundException e) {
+		defaultList();
 		e.printStackTrace();
+		return;
 	 } catch (IOException e) {
 		e.printStackTrace();
 	 } catch (ClassNotFoundException e) {

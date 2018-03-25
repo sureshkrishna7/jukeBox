@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.Serializable;
 import java.net.URI;
+import java.util.ArrayList;
 
 import controller_view.JukeBoxIter2;
 import javafx.collections.FXCollections;
@@ -11,14 +12,14 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class SongQueue implements Serializable{
-  private ObservableList<Song> songQueue;
+  private ArrayList<Song> songQueue;
   private boolean jukeBoxStartQueue;
   private Song currentSong;
   private MediaPlayer mediaPlayer;
   private Media media;
 
   public SongQueue() {
-	 songQueue = FXCollections.observableArrayList();
+	 songQueue = new ArrayList<Song>(9);
 	 jukeBoxStartQueue = true;
   }
   
@@ -44,18 +45,16 @@ public class SongQueue implements Serializable{
 		playSong(currentSong);
 		jukeBoxStartQueue = false;
 	 }
-	 else {
-		setCurrentSong(song1);
-	 }
+	 //else {
+		//setCurrentSong(song1);
+	 //}
 	 return;
   }
 
   private void playSong(Song song) {
 	 // TODO Auto-generated method stub
-	 //mediaPlayer.setOnEndOfMedia(null);
 
 	 mediaPlayer.play(); 
-
 	 mediaPlayer.setOnEndOfMedia(new Runnable() {
 		@Override
 		public void run() {
@@ -69,12 +68,12 @@ public class SongQueue implements Serializable{
 			 setCurrentSong(nextSong);
 			 playSong(currentSong);
 		  }
-		  return;
+		  //return;
 		}
 	 });
   }
 
-  public ObservableList<Song> getSongQueue() {
+  public ArrayList<Song> getSongQueue() {
 	 return songQueue;
   }
 
