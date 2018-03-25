@@ -8,3 +8,6 @@
 /SongCollection$1.class
 /SongViewer.class
 /QueueViewer.class
+/SongCollection$2.class
+/NotifyingThread.class
+/ThreadCompleteListener.class

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import controller_view.JukeBoxIter2;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.media.Media;
@@ -15,17 +16,14 @@ public class SongCollection {
 
   private HashMap<String, Song> songCollection;
   private ObservableList<Song> songQueue;
-  private ObservableList<String> songQueueTitles;
   private boolean jukeBoxStartQueue;
   private Song currentSong;
   private MediaPlayer mediaPlayer;
   private Media media;
-  private String currentSongTitle;
 
   public SongCollection() {
 	 songCollection = new HashMap<>();
 	 songQueue = FXCollections.observableArrayList();
-	 songQueueTitles = FXCollections.observableArrayList();
 	 jukeBoxStartQueue = true;
 	 dummySongs();
   }
@@ -40,7 +38,7 @@ public class SongCollection {
 	 Song g = new Song("Untameable Fire", new TimeObj(0, 4, 42), "Pierre Langer", "UntameableFire.mp3");
 	 Song h = new Song("Is it Love", new TimeObj(0, 0, 2), "3LAU", "IsItLove.mp3");
 	 Song i = new Song("Ice and Fire", new TimeObj(0, 0, 2), "Unknown", "IceFire.mp3");
-	 	 
+
 	 songCollection.put("a", a);
 	 songCollection.put("b", b);
 	 songCollection.put("c", c);
@@ -59,23 +57,22 @@ public class SongCollection {
   public void addSongtoQueue(Song song1) {	
 
 	 songQueue.add(song1);
-	 songQueueTitles.add(currentSongTitle == null ? song1.getTitle() : currentSongTitle);
 
-	 String path = song1.getSongFile();
+	 /*String path = song1.getSongFile();
 	 System.out.println("Song path = "+path);
 	 // Need a File and URI object so the path works on all OSs
 	 File file = new File(path);
 	 URI uri = file.toURI();
 	 // Play one mp3 and and have code run when the song ends
 	 media = new Media(uri.toString());
-	 mediaPlayer = new MediaPlayer(media);
+	 mediaPlayer = new MediaPlayer(media);*/
 
 	 //System.out.println("SongQueue = "+songQueue.toString());
 	 Song firstSong = null;
 	 if(jukeBoxStartQueue) {
 		firstSong = songQueue.remove(0);
-		songQueueTitles.remove(0);
 		System.out.println("SongQueue 1= "+songQueue.toString());
+		setCurrentSong(firstSong);
 		playSong(currentSong);
 		jukeBoxStartQueue = false;
 	 }
@@ -87,21 +84,24 @@ public class SongCollection {
 
   private void playSong(Song song) {
 	 // TODO Auto-generated method stub
-	 mediaPlayer.play();
+	 //mediaPlayer.setOnEndOfMedia(null);
+
+	 mediaPlayer.play(); 
+
 	 mediaPlayer.setOnEndOfMedia(new Runnable() {
 		@Override
 		public void run() {
+		  JukeBoxIter2.removeSongQueueTitle();
 		  mediaPlayer.stop();
 		  mediaPlayer = new MediaPlayer(media);
 		  if (songQueue.size() > 0) {
 			 //Plays the subsequent song files
 			 Song nextSong = songQueue.remove(0);
-			 songQueueTitles.remove(0);
 			 System.out.println("SongQueue 2= "+songQueue.toString());
 			 setCurrentSong(nextSong);
 			 playSong(currentSong);
 		  }
-		  jukeBoxStartQueue = true;
+		  return;
 		}
 	 });
   }
@@ -110,10 +110,6 @@ public class SongCollection {
 	 return songQueue;
   }
 
-  public ObservableList<String> getSongQueueTitles() {
-	  return songQueueTitles;
-  }
-  
   public void setCurrentSong(Song newSong) {
 	 String path = newSong.getSongFile();
 	 System.out.println("Song path = "+path);
@@ -124,7 +120,6 @@ public class SongCollection {
 	 media = new Media(uri.toString());
 	 mediaPlayer = new MediaPlayer(media);
 	 currentSong = newSong;
-	 currentSongTitle = newSong.getTitle();
   }
 
   public void removeSongFromQueue() {
