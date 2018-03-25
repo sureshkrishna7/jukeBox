@@ -24,6 +24,7 @@ import model.Player;
 import model.PlayerList;
 import model.Song;
 import model.SongCollection;
+import model.SongQueue;
 
 /*
  * Class: JukeBox
@@ -36,6 +37,7 @@ public class JukeBoxIter1 extends Application {
 
   private PlayerList playerList;
   private SongCollection songCollection;
+  private SongQueue songQueue;
   private Player currentUser; // the one who uses the GUI
   private TextField input1;
   private PasswordField input2;
@@ -118,6 +120,8 @@ public class JukeBoxIter1 extends Application {
 
 	 // shows the entire stage
 
+	 initializeList();
+	 
 	 if(System.getProperty("os.name").contains("Windows")) {
 		Scene scene = new Scene(all, 325, 250);
 		primaryStage.setScene(scene);
@@ -129,6 +133,13 @@ public class JukeBoxIter1 extends Application {
 		primaryStage.show();
 	 }
   }// end start
+
+  private void initializeList() {
+	 // TODO Auto-generated method stub
+	 playerList.setUpDefault();
+	 //songViewer.setObserverList();
+	 songCollection.defaultSongCollection();
+  }
 
   /*
    * ButtonListener -- handler for buttons pressed in the GUI. Has all necessary actions for possible events and situations.
@@ -208,7 +219,7 @@ public class JukeBoxIter1 extends Application {
 		if(buttonClicked.getText().equals("Select song 1")) {
 		  System.out.println("Song 1 button clicked");
 
-		  Song song1 = songCollection.getSongCollection().get("a");
+		  Song song1 = songCollection.getSongCollection().get(0);
 		  
 		  if(currentUser != null) {
 
@@ -223,7 +234,7 @@ public class JukeBoxIter1 extends Application {
 				currentUser.time().subtractTimeBySeconds(song1.getSongLengthSec());
 				song1.useSongToday();
 				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
-				songCollection.addSongtoQueue(song1);
+				songQueue.addSongtoQueue(song1);
 			 }
 			 // when the player is out of 3 chances
 			 else if(!currentUser.canPlaySong()) {
@@ -246,7 +257,7 @@ public class JukeBoxIter1 extends Application {
 		if(buttonClicked.getText().equals("Select song 2")) {
 		  System.out.println("Song 2 button clicked");
 
-		  Song song2 = songCollection.getSongCollection().get("d");
+		  Song song2 = songCollection.getSongCollection().get(3);
 
 		  if(currentUser != null) {
 
@@ -262,7 +273,7 @@ public class JukeBoxIter1 extends Application {
 				song2.useSongToday();
 				loginText.setText(currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
 				
-				songCollection.addSongtoQueue(song2);
+				songQueue.addSongtoQueue(song2);
 			 }
 			 // when the player is out of 3 chances
 			 else if(!currentUser.canPlaySong()) {
