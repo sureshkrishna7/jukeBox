@@ -1,12 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 /*
  * Class: Adjuster
  * Authors: Suresh Krishna and Andrew Lane
  * Purpose: The class is a that will keep track of song choices, an instance of it will be present in the Player class.
  */
-public class Adjuster {
+public class Adjuster implements Serializable {
 
   private int maxUses;
   private int countUsed;

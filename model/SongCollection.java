@@ -1,16 +1,17 @@
 package model;
 
 import java.io.File;
+import java.io.Serializable;
 import java.net.URI;
 import java.util.HashMap;
-
 import controller_view.JukeBoxIter2;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-public class SongCollection {
+@SuppressWarnings("serial")
+public class SongCollection implements Serializable {
 
   private HashMap<String, Song> songCollection;
   private ObservableList<Song> songQueue;

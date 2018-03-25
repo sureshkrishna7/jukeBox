@@ -1,6 +1,8 @@
 package model;
 
-public class TimeObj {
+import java.io.Serializable;
+
+public class TimeObj implements Serializable {
 
   private int hour;
   private int min;

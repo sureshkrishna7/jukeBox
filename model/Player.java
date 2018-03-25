@@ -1,11 +1,13 @@
 package model;
 
+import java.io.Serializable;
+
 /*
  * Class: Player
  * Authors: Suresh Krishna and Andrew Lane
  * Purpose: 
  */
-public class Player {
+public class Player implements Serializable {
 
   private String ID;
   private String password;

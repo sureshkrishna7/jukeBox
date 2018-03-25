@@ -1,20 +1,22 @@
 package model;
 
 import javafx.scene.control.TableColumn;
+
+import java.io.Serializable;
 import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class SongViewer extends TableView<Song> {
+public class SongViewer extends TableView<Song> implements Serializable {
 
-	TableColumn<Song, String> playCountCol;
-	TableColumn<Song, String> titleCol;
-	TableColumn<Song, String> artistCol;
-	TableColumn<Song, String> timeCol;
-	SongCollection songList;
-	ObservableList<Song> songs;
+	private TableColumn<Song, String> playCountCol;
+	private TableColumn<Song, String> titleCol;
+	private TableColumn<Song, String> artistCol;
+	private TableColumn<Song, String> timeCol;
+	private SongCollection songList;
+	private ObservableList<Song> songs;
 	
 	@SuppressWarnings("unchecked")
 	public SongViewer() {
