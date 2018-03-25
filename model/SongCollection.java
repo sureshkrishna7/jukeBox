@@ -101,6 +101,7 @@ public class SongCollection {
 			 setCurrentSong(nextSong);
 			 playSong(currentSong);
 		  }
+		  JukeBoxIter2.setThreadEnded();
 		  return;
 		}
 	 });
