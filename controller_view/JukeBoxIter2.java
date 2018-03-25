@@ -186,6 +186,7 @@ public class JukeBoxIter2 extends Application {
 					 currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
 				songQueueTitle.add(song.getTitle());
 				songCollection.addSongtoQueue(song);
+				songViewer.updatePlayCount();
 			 }
 			 // when the player is out of 3 chances
 			 else if (!currentUser.canPlaySong()) {

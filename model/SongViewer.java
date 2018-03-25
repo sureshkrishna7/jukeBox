@@ -13,6 +13,8 @@ public class SongViewer extends TableView<Song> {
 	TableColumn<Song, String> titleCol;
 	TableColumn<Song, String> artistCol;
 	TableColumn<Song, String> timeCol;
+	SongCollection songList;
+	ObservableList<Song> songs;
 	
 	@SuppressWarnings("unchecked")
 	public SongViewer() {
@@ -38,8 +40,8 @@ public class SongViewer extends TableView<Song> {
 	}
 
 	public void setObserverList() {
-		SongCollection songList = new SongCollection();
-		ObservableList<Song> songs = FXCollections.observableArrayList();
+		songList = new SongCollection();
+		songs = FXCollections.observableArrayList();
 		for(Map.Entry<String, Song> entry : songList.getSongCollection().entrySet()){
 			songs.add(entry.getValue());
 		}
@@ -47,8 +49,11 @@ public class SongViewer extends TableView<Song> {
 		this.getSelectionModel().select(0);
 	}
 	
-	/*public void updatePlayCount() {
-		playCountCol.setCellValueFactory(new PropertyValueFactory<Song, String>("playCount"));
-		this.getColumns().addAll(playCountCol, titleCol, artistCol, timeCol);
-	}*/
+	public void updatePlayCount() {
+		songs.removeAll(songs);
+		for(Map.Entry<String, Song> entry : songList.getSongCollection().entrySet()){
+			songs.add(entry.getValue());
+		}
+	}
+	
 }
