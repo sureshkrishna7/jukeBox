@@ -46,8 +46,6 @@ public class JukeBoxIter2 extends Application {
   private SongViewer songViewer;
   private ListView<String> listView;
   private static ObservableList<String> songQueueTitle;
-  private static boolean threadEnded;
-
 
   public static void main(String[] args) {
 	 launch(args);
@@ -71,7 +69,6 @@ public class JukeBoxIter2 extends Application {
 	 playerList = new PlayerList();
 	 songCollection = new SongCollection();
 	 songViewer = new SongViewer();
-	 threadEnded = false;
 
 	 songQueueTitle = FXCollections.observableArrayList();
 	 //queueViewer = new QueueViewer(songCollection.getSongQueue());
@@ -189,10 +186,6 @@ public class JukeBoxIter2 extends Application {
 					 currentUser.songsPlayed() + " selected. " + currentUser.time().getTimeAsString());
 				songQueueTitle.add(song.getTitle());
 				songCollection.addSongtoQueue(song);
-				if(threadEnded) {
-				  threadEnded = false;
-				  songCollection = new SongCollection();
-				}
 			 }
 			 // when the player is out of 3 chances
 			 else if (!currentUser.canPlaySong()) {
@@ -393,10 +386,8 @@ public class JukeBoxIter2 extends Application {
   public static void removeSongQueueTitle() {
 	 // TODO Auto-generated method stub
 	 songQueueTitle.remove(0);
-  }
-
-  public static void setThreadEnded() {
-	 // TODO Auto-generated method stub
-	 threadEnded = true;
+	 if(songQueueTitle.isEmpty()) {
+		songCollection = new SongCollection();
+	 }
   }
 }

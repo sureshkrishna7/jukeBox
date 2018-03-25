@@ -3,8 +3,6 @@ package model;
 import java.io.File;
 import java.net.URI;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import controller_view.JukeBoxIter2;
 import javafx.collections.FXCollections;
@@ -101,7 +99,6 @@ public class SongCollection {
 			 setCurrentSong(nextSong);
 			 playSong(currentSong);
 		  }
-		  JukeBoxIter2.setThreadEnded();
 		  return;
 		}
 	 });
