@@ -76,6 +76,10 @@ public class SongQueue implements Serializable{
   public ArrayList<Song> getSongQueue() {
 	 return songQueue;
   }
+  
+  public MediaPlayer getPlayer() {
+	  return mediaPlayer;
+  }
 
   public void setCurrentSong(Song newSong) {
 	 String path = newSong.getSongFile();
