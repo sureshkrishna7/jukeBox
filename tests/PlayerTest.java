@@ -63,4 +63,20 @@ public class PlayerTest {
 		Player p = new Player("eggs", "beni");
 		assertTrue(p.time().getHour() == 25);
 	}
+	
+	@Test
+	public void testCanPlaySongGetNameSongsPlayedRemainingSong() {
+		Player p = new Player("dav", "pilkey");
+		assertTrue(p.remainingSongs() == 3);
+		assertTrue(p.songsPlayed() == 0);
+		assertTrue(p.canPlaySong());
+		assertTrue(p.getName().equals("dav"));
+	}
+	
+	@Test
+	public void testCheckCredentials() {
+		Player p = new Player("Shugga", "dDdD");
+		assertTrue(p.checkCredential("Shugga", "dDdD"));
+		assertFalse(p.checkCredential("Shugga", "EEE"));
+	}
 }
