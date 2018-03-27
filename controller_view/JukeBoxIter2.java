@@ -54,6 +54,7 @@ public class JukeBoxIter2 extends Application {
   private PlayerList playerList;
   private static SongCollection songCollection;
   private static SongQueue songQueue;
+  private ChangeListener<SongQueue> queueChange;
   private Player currentUser; // the one who uses the GUI
   private TextField input1;
   private PasswordField input2;
@@ -64,7 +65,6 @@ public class JukeBoxIter2 extends Application {
   private SongViewer songViewer;
   private ListView<String> listView;
   private static ObservableList<String> songQueueTitle;
-  // private ObservableList<Serializable> persistList;
   private ProgressBar progBar;
   private ChangeListener<Duration> progressChangeListener;
   private final static String persistedSongQueueFile = "SongQueueData";
@@ -82,6 +82,12 @@ public class JukeBoxIter2 extends Application {
 	 playerList = new PlayerList();
 	 songCollection = new SongCollection();
 	 songQueue = new SongQueue();
+	 queueChange = new ChangeListener<SongQueue>() {
+		@Override
+		public void changed(ObservableValue<? extends SongQueue> observable, SongQueue oldValue, SongQueue newValue) {
+			setCurrentlyPlaying(songQueue.getPlayer());
+		}
+	 };
 	 songQueueTitle = FXCollections.observableArrayList();
 
 	 // ** *****
@@ -222,6 +228,7 @@ public class JukeBoxIter2 extends Application {
    * setCurrentlyPlaying(MediaPlayer) -- this method instantiates a ChangeListener that updates the progress bar 
    */
   private void setCurrentlyPlaying(final MediaPlayer newPlayer) {
+	 System.out.println("setCurrentlyPlaying: " + newPlayer.toString());
 	 progBar.setProgress(0);
 	 progressChangeListener = new ChangeListener<Duration>() {
 		@Override
