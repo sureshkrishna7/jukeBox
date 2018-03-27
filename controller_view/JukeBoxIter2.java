@@ -54,7 +54,6 @@ public class JukeBoxIter2 extends Application {
   private PlayerList playerList;
   private static SongCollection songCollection;
   private static SongQueue songQueue;
-  private ChangeListener<SongQueue> queueChange;
   private Player currentUser; // the one who uses the GUI
   private TextField input1;
   private PasswordField input2;
@@ -83,12 +82,6 @@ public class JukeBoxIter2 extends Application {
 	 playerList = new PlayerList();
 	 songCollection = new SongCollection();
 	 songQueue = new SongQueue();
-	 queueChange = new ChangeListener<SongQueue>() {
-		@Override
-		public void changed(ObservableValue<? extends SongQueue> observable, SongQueue oldValue, SongQueue newValue) {
-			setCurrentlyPlaying(songQueue.getPlayer());
-		}
-	 };
 	 songQueueTitle = FXCollections.observableArrayList();
 	 progBar = new ProgressBar(0);
 
