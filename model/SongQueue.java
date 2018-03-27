@@ -1,13 +1,14 @@
 package model;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
 
+import javax.swing.AbstractAction;
+
 import controller_view.JukeBoxIter2;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -97,4 +98,5 @@ public class SongQueue implements Serializable{
   public void removeSongFromQueue() {
 	 songQueue.remove(0);
   }
+
 }
