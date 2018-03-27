@@ -91,6 +91,7 @@ public class SongQueue implements Serializable{
 	 media = new Media(uri.toString());
 	 mediaPlayer = new MediaPlayer(media);
 	 currentSong = newSong;
+	 JukeBoxIter2.setCurrentlyPlaying(mediaPlayer);
   }
 
   public void removeSongFromQueue() {

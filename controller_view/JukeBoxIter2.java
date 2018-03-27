@@ -65,8 +65,8 @@ public class JukeBoxIter2 extends Application {
   private ListView<String> listView;
   private static ObservableList<String> songQueueTitle;
   // private ObservableList<Serializable> persistList;
-  private ProgressBar progBar;
-  private ChangeListener<Duration> progressChangeListener;
+  private static ProgressBar progBar;
+  private static ChangeListener<Duration> progressChangeListener;
   private final static String persistedSongQueueFile = "SongQueueData";
   private final static String persistedPlayerListFile = "PlayerListData";
   private final static String persistedSongCollectionFile = "SongCollectionData";
@@ -83,6 +83,7 @@ public class JukeBoxIter2 extends Application {
 	 songCollection = new SongCollection();
 	 songQueue = new SongQueue();
 	 songQueueTitle = FXCollections.observableArrayList();
+	 progBar = new ProgressBar(0);
 
 	 // ** *****
 	 // ***DONT*** Intialize ****songViewer**** here
@@ -118,7 +119,6 @@ public class JukeBoxIter2 extends Application {
 	 topGrid.add(play, 1, 1);
 
 	 // progress bar for song as it's playing, add to grid
-	 progBar = new ProgressBar(0);
 	 progBar.setPadding(new Insets(15));
 	 progBar.setPrefWidth(255);
 	 progBar.progressProperty().addListener(new ChangeListener<Number>(){
@@ -221,7 +221,7 @@ public class JukeBoxIter2 extends Application {
   /*
    * setCurrentlyPlaying(MediaPlayer) -- this method instantiates a ChangeListener that updates the progress bar 
    */
-  private void setCurrentlyPlaying(final MediaPlayer newPlayer) {
+  public static void setCurrentlyPlaying(final MediaPlayer newPlayer) {
 	 progBar.setProgress(0);
 	 progressChangeListener = new ChangeListener<Duration>() {
 		@Override
@@ -430,7 +430,7 @@ public class JukeBoxIter2 extends Application {
 				songQueueTitle.add(song.getTitle());
 				songQueue.addSongtoQueue(song);
 				songViewer.updatePlayCount();
-				setCurrentlyPlaying(songQueue.getPlayer());
+				//setCurrentlyPlaying(songQueue.getPlayer());
 			 }
 			 // when the player is out of 3 chances
 			 else if (!currentUser.canPlaySong()) {
