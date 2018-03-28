@@ -30,7 +30,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -101,6 +107,7 @@ public class JukeBoxIter2 extends Application {
 
 	 // add header form song list
 	 Label songListHeader = new Label("Song List");
+	 songListHeader.setId("h1");
 	 topGrid.add(songListHeader, 0, 0);
 
 	 // adding songViewer TableView
@@ -157,7 +164,8 @@ public class JukeBoxIter2 extends Application {
 	 //topGrid.add(vbox, 1, 1);
 	 //topGrid.add(vbox, 2, 2);
 	 vbox.setAlignment(Pos.CENTER);
-	 // the buttons are set top of the border pane
+	 // the buttons are set top of the border pane\
+	 topGrid.add(vbox,2,2);
 	 all.setTop(topGrid);
 
 	 // the mid grid contains the textfields, login and logout buttons
@@ -172,9 +180,19 @@ public class JukeBoxIter2 extends Application {
 	 midGrid.add(input2, 1, 2);
 
 	 login = new Button("Login");
+
+	 login.setStyle("-fx-background-radius: 40px;" +
+		  "-fx-font-size: 11pt; " +
+		  "-fx-text-fill: white; -fx-color: #0066ff;");
+
 	 login.setOnAction(loginHandler);
 	 loginText = new Label("Login first");
 	 logout = new Button("Logout");
+
+	 logout.setStyle("-fx-background-radius: 40px;" +
+		  "-fx-font-size: 11pt; " +
+		  "-fx-text-fill: white; -fx-color: red;");
+
 	 logout.setDisable(true);
 	 logout.setOnAction(loginHandler);
 
@@ -183,9 +201,7 @@ public class JukeBoxIter2 extends Application {
 	 midGrid.add(login, 2, 1);
 	 midGrid.add(loginText, 1, 0);
 	 midGrid.add(logout, 2, 2);
-	 
-	 midGrid.add(vbox,27,0);
-	 
+
 	 // the entire body is set to the center
 	 all.setCenter(midGrid);
 
@@ -201,16 +217,36 @@ public class JukeBoxIter2 extends Application {
 
 	 if (System.getProperty("os.name").contains("Windows")) {
 		Scene scene = new Scene(all);
+		scene.getStylesheets().add("controller_view/style.css");
 		primaryStage.setScene(scene);
 		primaryStage.sizeToScene();
 		primaryStage.show();
+		System.out.println("height = "+primaryStage.getHeight());
+		System.out.println("width = "+primaryStage.getWidth());
+
+		BackgroundImage myBI= new BackgroundImage(new Image("source1.gif",primaryStage.getWidth(),primaryStage.getHeight(),false,true),
+			 BackgroundRepeat.NO_REPEAT , BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+			 BackgroundSize.DEFAULT);
+		//then you set to your node
+		all.setBackground(new Background(myBI));
+
 		primaryStage.setMinWidth(primaryStage.getWidth());
 		primaryStage.setMinHeight(primaryStage.getHeight());
 	 } else {
 		Scene scene = new Scene(all);
+		scene.getStylesheets().add("controller_view/style.css");
 		primaryStage.setScene(scene);
 		primaryStage.sizeToScene();
 		primaryStage.show();
+		System.out.println("height = "+primaryStage.getHeight());
+		System.out.println("width = "+primaryStage.getWidth());
+
+		BackgroundImage myBI= new BackgroundImage(new Image("source1.gif",scene.getWidth(),scene.getHeight(),false,true),
+			 BackgroundRepeat.NO_REPEAT , BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+			 BackgroundSize.DEFAULT);
+		//then you set to your node
+		all.setBackground(new Background(myBI));
+
 		primaryStage.setMinWidth(primaryStage.getWidth());
 		primaryStage.setMinHeight(primaryStage.getHeight());
 	 }
