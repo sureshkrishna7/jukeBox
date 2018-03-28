@@ -40,7 +40,12 @@ public class Adjuster implements Serializable {
   /*
    * canUse() -- returns boolean false if maxUses has been reached, true otherwise
    */
-  public boolean canUse() {
+  public boolean canUse() { 
+	 if(!today.isEqual(LocalDate.now())) {
+		  countUsed = 0;
+		  today = LocalDate.now();
+		  return true;
+	 } 
 	 if(countUsed == maxUses) return false;
 	 return true;
   }

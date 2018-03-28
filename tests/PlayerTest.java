@@ -41,6 +41,10 @@ public class PlayerTest {
 		assertFalse(p.getAdjuster().canUse());
 		p.getAdjuster().pretendItIsTomorrow();
 		assertTrue(p.getAdjuster().canUse());
+		p.useSong();
+		p.useSong();
+		p.useSong();
+		p.getAdjuster().use();
 	}
 
 	@Test
