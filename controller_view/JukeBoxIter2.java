@@ -196,6 +196,11 @@ public class JukeBoxIter2 extends Application {
 	 logout.setDisable(true);
 	 logout.setOnAction(loginHandler);
 
+	 
+	 play.setStyle("-fx-background-radius: 50%;" +
+		  "-fx-font-size: 16pt; " + "-fx-padding: 10px;" + 
+		  "-fx-text-fill: white; -fx-color: red;");
+	 
 	 play.setOnAction(playHandler);
 
 	 midGrid.add(login, 2, 1);
